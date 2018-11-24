@@ -13,8 +13,7 @@ class DeepMindDecoder:
         return x
 
     def build(self, encoder_output):
-        inp = encoder_output
-        x = Dense(units=256, activation='linear', name='decoder_inp')(inp)
+        x = Dense(units=256, activation='linear', name='decoder_inp')(encoder_output)
         x = Dense(units=256, activation='linear')(x)
         x = Reshape((-1, 1, 256), input_shape=(256,))(x)
 
