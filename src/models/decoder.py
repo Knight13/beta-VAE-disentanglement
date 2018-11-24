@@ -23,7 +23,7 @@ class DeepMindDecoder:
         for _ in range(4):
             x = self.deconv_func(x)
 
-        x = Convolution2D(3, (1, 1), padding='same')(x)
+        x = Convolution2D(1, (1, 1), padding='same')(x)
         x = BatchNormalization()(x)
 
         decoded = x

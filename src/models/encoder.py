@@ -23,7 +23,7 @@ class DeepMindEncoder:
         return x
 
     def build(self, vae_gamma, vae_capacity):
-        init = x = Input((self._input_shape, self._input_shape, 3))
+        init = x = Input((self._input_shape, self._input_shape, 1))
 
         for _ in range(4):
             x = self.conv_func(x)
