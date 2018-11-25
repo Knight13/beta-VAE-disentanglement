@@ -95,7 +95,7 @@ def main(args):
         path = os.path.join(args.arch_dir, arch_pdf)
         plot_model(model, path)
 
-    model.compile(optimizer=optimizer, loss=['mean_squared_error'])
+    model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
 
     # ToDO: Train model using fit generator
     pass
