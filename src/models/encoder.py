@@ -32,7 +32,7 @@ class DeepMindEncoder:
         x = Flatten()(x)
         x = Dense(units=256, activation='linear')(x)
         x = Dense(units=256, activation='linear')(x)
-        x = Dense(units=20, activation='linear')(x)
+        x = Dense(units=self._z_dim * 2, activation='linear')(x)
         # Beta-VAE implementation as follows
 
         z_mean = Dense(units=self._z_dim, activation='linear')(x)

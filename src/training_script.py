@@ -15,11 +15,13 @@ from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau
 import time
 from numpy.random import seed
 
+seed(1990)
+set_random_seed(1990)
+
+
 def main(args):
-    # ToDO :  Write a function to select optimizer
     optimizer = utils.select_optimizer(optimizer=args.optimizer, base_learning_rate=args.base_learning_rate)
 
-    # ToDo: Create data generators (Training/ Validation)
     print("Creating data generators.......")
     data_gen = ImageDataGenerator(
         rescale=1 / 255.,
@@ -51,7 +53,6 @@ def main(args):
 
     validation_generator = utils.batch_gen(generator_object=validation_generator)
 
-    # ToDo: Create Generic Callbacks (Tensorboard/ Modelcheckpoint)
     print("Creating callbacks.......")
     lr_schedule = ReduceLROnPlateau(monitor='val_loss', factor=args.decay_factor,
                                     mode='min', patience=args.scheduler_epoch, min_lr=1e-010)
@@ -64,13 +65,11 @@ def main(args):
     checkpoint = ModelCheckpoint(filepath=save_file, monitor='val_loss',
                                  verbose=0, save_best_only=True, save_weights_only=False, mode='auto', period=1)
 
-    # ToDo: Create Custom Callbacks to generate images from test set at the end of each epoch / linearly increase C.
-    generator_cb = utils.GenerateImage(test_image_folder=args.test_image_folder, target_dir=args.target_image_dir,
+    generator_cb = utils.GenerateImage(test_image_folder=args.test_image_folder, target_dir=args.gen_image_dir,
                                        image_shape=args.image_size, encoder_name=args.encoder_type)
 
     capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.num_epochs)
 
-    # ToDo: Build Model
     if args.pretrained_model is not None:
         print("Loading pre-trained model.......")
         model = load_model(args.pretrained_model, custom_objects={'SampleLayer': sample_layer.SampleLayer})
@@ -98,13 +97,94 @@ def main(args):
     model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
 
     # ToDO: Train model using fit generator
-    pass
+    model.fit_generator(train_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
+                        validation_data=validation_generator, validation_steps=validation_steps,
+                        callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule])
 
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
 
-    # ToDo: Add args to pass in default arguments
+    parser.add_argument('--encoder_type', type=str, choices=['deepmind_enc'],
+                        help='The encoder architecture to use', default='deepmind_enc')
+
+    parser.add_argument('--data_dir', type=str,
+                        help='Data directory.',
+                        default=None)
+
+    parser.add_argument('--graph_dir', type=str,
+                        help='The directory to write the training graphs.',
+                        default='../graphs/')
+
+    parser.add_argument('--arch_dir', type=str,
+                        help='The directory to write the model architectures in pdf format.',
+                        default='architectures/')
+
+    parser.add_argument('--save_dir', type=str,
+                        help='The directory to save the trained model.',
+                        default='../saved_models/')
+
+    parser.add_argument('--pretrained_model', type=str,
+                        help='The directory to load the pre-trained model.',
+                        default=None)
+
+    parser.add_argument('--test_image_folder', type=str,
+                        help='The directory of the test images.',
+                        default=None)
+
+    parser.add_argument('--gen_image_dir', type=str,
+                        help='The directory to save the generated images at the end of each epoch.',
+                        default=None)
+
+    parser.add_argument('--preprocess_action', type=str,
+                        help='The action to be taken for preprocessing - simple or mean_centered.',
+                        default="simple")
+
+    parser.add_argument('--bottleneck', type=int,
+                        help='The size of the embedding layers.', default=10)
+
+    parser.add_argument('--val_split', type=float,
+                        help='The percentage of generated_data in the validation set',
+                        default=0.2)
+
+    parser.add_argument('--image_size', type=int,
+                        help='Size of the input image',
+                        default=64)
+
+    parser.add_argument('--train_batch_size', type=int,
+                        help='Batch size for training.',
+                        default=16)
+
+    parser.add_argument('--val_batch_size', type=int,
+                        help='Batch size for validation.',
+                        default=12)
+
+    parser.add_argument('--optimizer', type=str, choices=['ADAGRAD', 'ADADELTA', 'ADAM', 'RMSPROP', 'SGD'],
+                        help='The optimization algorithm to use', default='ADAM')
+
+    parser.add_argument('--base_learning_rate', type=float,
+                        help='The base learning rate for the model.',
+                        default=5e-4)
+
+    parser.add_argument('--num_epochs', type=int,
+                        help='The total number of epochs for training.',
+                        default=50)
+
+    parser.add_argument('--scheduler_epoch', type=int,
+                        help='The number of epochs to wait for the val loss to improve.',
+                        default=5)
+
+    parser.add_argument('--decay_factor', type=float,
+                        help='The learning rate decay factor.',
+                        default=0.1)
+
+    parser.add_argument('--vae_gamma', type=float,
+                        help='The vae regularizer.',
+                        default=1000)
+
+    parser.add_argument('--capacity', type=float,
+                        help='The latent space capacity.',
+                        default=50.0)
 
     return parser.parse_args(argv)
 
