@@ -3,8 +3,9 @@ from keras.layers import Convolution2D, UpSampling2D, Deconvolution2D, Reshape, 
 
 
 class DeepMindDecoder:
-    def __init__(self, decoder_input, output_shape):
+    def __init__(self, decoder_input, latent_dim, output_shape):
         self._dec_input = decoder_input
+        self._latent_dim = latent_dim
         self.__dewconv_func_reps = int(output_shape / 16)
 
     @staticmethod
@@ -14,7 +15,8 @@ class DeepMindDecoder:
         return x
 
     def build(self, encoder_output):
-        x = Dense(units=256, activation='linear', name='decoder_inp')(encoder_output)
+        x = Reshape((self._latent_dim,), input_shape=(self._latent_dim,))(encoder_output)
+        x = Dense(units=256, activation='linear', name='decoder_inp')(x)
         x = Dense(units=256, activation='linear')(x)
         x = Reshape((-1, 1, 256), input_shape=(256,))(x)
 
