@@ -24,7 +24,6 @@ def main(args):
 
     print("Creating data generators.......")
     data_gen = ImageDataGenerator(
-        rescale=1 / 255.,
         validation_split=args.val_split)
 
     train_generator = data_gen.flow_from_directory(
@@ -96,7 +95,6 @@ def main(args):
 
     model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
 
-    # ToDO: Train model using fit generator
     model.fit_generator(train_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
                         validation_data=validation_generator, validation_steps=validation_steps,
                         callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule])
@@ -111,7 +109,7 @@ def parse_arguments(argv):
     parser.add_argument('--data_dir', type=str,
                         help='Data directory.',
                         default=None)
-
+    
     parser.add_argument('--graph_dir', type=str,
                         help='The directory to write the training graphs.',
                         default='../graphs/')
@@ -130,11 +128,11 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image_folder', type=str,
                         help='The directory of the test images.',
-                        default=None)
+                        default='../test_images/')
 
     parser.add_argument('--gen_image_dir', type=str,
                         help='The directory to save the generated images at the end of each epoch.',
-                        default=None)
+                        default='../generated_images/')
 
     parser.add_argument('--preprocess_action', type=str,
                         help='The action to be taken for preprocessing - simple or mean_centered.',
