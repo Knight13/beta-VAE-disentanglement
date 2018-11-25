@@ -50,9 +50,26 @@ def main(args):
     train_generator = utils.batch_gen(generator_object=train_generator)
 
     validation_generator = utils.batch_gen(generator_object=validation_generator)
+
     # ToDo: Create Generic Callbacks (Tensorboard/ Modelcheckpoint)
+    print("Creating callbacks.......")
+    lr_schedule = ReduceLROnPlateau(monitor='val_loss', factor=args.decay_factor,
+                                    mode='min', patience=args.scheduler_epoch, min_lr=1e-010)
+
+    tb = TensorBoard(log_dir=args.graph_dir, histogram_freq=0, write_graph=True, write_images=True)
+
+    timestamp = time.strftime("%d%m%Y", time.localtime())
+
+    save_file = os.path.join(args.save_dir, str(args.encoder_type + '_vae' + timestamp + '.hdf5'))
+    checkpoint = ModelCheckpoint(filepath=save_file, monitor='val_loss',
+                                 verbose=0, save_best_only=True, save_weights_only=False, mode='auto', period=1)
 
     # ToDo: Create Custom Callbacks to generate images from test set at the end of each epoch / linearly increase C.
+    generator_cb = utils.GenerateImage(test_image_folder=args.test_image_folder, target_dir=args.target_image_dir,
+                                       action=args.preprocess_action, image_shape=args.image_size,
+                                       encoder_name=args.encoder_type)
+
+    capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.num_epochs)
 
     # ToDo: Build Model
 

@@ -40,17 +40,14 @@ def select_optimizer(optimizer, base_learning_rate):
 
 
 class GenerateImage(Callback):
-    def __init__(self, test_image_folder, target_dir, action, image_shape, encoder_name):
+    def __init__(self, test_image_folder, target_dir, image_shape, encoder_name):
         self.test = []
         self.gen_images = []
         self.target_dir = target_dir
-        self.action = action
         self.encoder_name = encoder_name
         for image in os.listdir(test_image_folder):
-            image = Image.open(os.path.join(test_image_folder, image))
+            image = Image.open(os.path.join(test_image_folder, image)).convert('L')
             image = image.resize((image_shape, image_shape), Image.NEAREST)
-            image = np.asarray(image) / 255.
-            image = pre_process(image, self.action)
             self.test.append(image)
         super(Callback).__init__()
 
@@ -60,14 +57,9 @@ class GenerateImage(Callback):
     def on_epoch_end(self, epoch, logs=None):
         for image_data in self.test:
             gen_image = self.model.predict(np.array([image_data]))
-            if self.action == 'simple':
-                gen_image[gen_image > 0.5] = 0.5
-                gen_image[gen_image < -0.5] = -0.5
-                gen_image = np.uint8((gen_image + 0.5) * 255)
-                gen_image = gen_image[0]
-
-            elif self.action == 'mean_centered':
-                gen_image = gen_image[0]
+            gen_image = gen_image[0]
+            gen_image = gen_image.astype(np.int8)
+            gen_image = np.stack((gen_image,) * 3, axis=2)
             self.gen_images.append(Image.fromarray(gen_image))
 
         folder = "epoch_" + str(epoch)
