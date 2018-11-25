@@ -90,9 +90,9 @@ def main(args):
 
     arch_pdf = args.encoder_type + '_model.pdf'
 
-    # if arch_pdf not in os.listdir(args.arch_dir):
-    #     path = os.path.join(args.arch_dir, arch_pdf)
-    #     plot_model(model, path)
+    if arch_pdf not in os.listdir(args.arch_dir):
+        path = os.path.join(args.arch_dir, arch_pdf)
+        plot_model(model, path)
 
     model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
 
