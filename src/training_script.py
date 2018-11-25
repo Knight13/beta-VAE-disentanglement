@@ -24,6 +24,7 @@ def main(args):
 
     print("Creating data generators.......")
     data_gen = ImageDataGenerator(
+        rescale=1 / 255.,
         validation_split=args.val_split)
 
     train_generator = data_gen.flow_from_directory(
@@ -48,7 +49,7 @@ def main(args):
     print('Steps per epoch in training: ', training_steps)
     print('Steps per epoch in validation: ', validation_steps)
 
-    train_generator = utils.batch_gen(generator_object=train_generator)
+    training_generator = utils.batch_gen(generator_object=train_generator)
 
     validation_generator = utils.batch_gen(generator_object=validation_generator)
 
@@ -80,7 +81,7 @@ def main(args):
                                                    bottleneck=args.bottleneck, vae_gamma=args.vae_gamma)
         z = enc_model.output
 
-        dec = decoder.DeepMindDecoder(decoder_input=z, output_shape=args.image_size)
+        dec = decoder.DeepMindDecoder(decoder_input=z, latent_dim=args.bottleneck, output_shape=args.image_size)
         dec_output = dec.create_decoder()
 
         model = Model(inputs=[enc_input], outputs=[dec_output])
@@ -95,7 +96,7 @@ def main(args):
 
     model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
 
-    model.fit_generator(train_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
+    model.fit_generator(training_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
                         validation_data=validation_generator, validation_steps=validation_steps,
                         callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule])
 
@@ -151,11 +152,11 @@ def parse_arguments(argv):
 
     parser.add_argument('--train_batch_size', type=int,
                         help='Batch size for training.',
-                        default=16)
+                        default=512)
 
     parser.add_argument('--val_batch_size', type=int,
                         help='Batch size for validation.',
-                        default=12)
+                        default=256)
 
     parser.add_argument('--optimizer', type=str, choices=['ADAGRAD', 'ADADELTA', 'ADAM', 'RMSPROP', 'SGD'],
                         help='The optimization algorithm to use', default='ADAM')
@@ -166,7 +167,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--num_epochs', type=int,
                         help='The total number of epochs for training.',
-                        default=50)
+                        default=200)
 
     parser.add_argument('--scheduler_epoch', type=int,
                         help='The number of epochs to wait for the val loss to improve.',
