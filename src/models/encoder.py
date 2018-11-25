@@ -15,6 +15,7 @@ class DeepMindEncoder:
     def __init__(self, input_shape=64, latent_dim=10):
         self._input_shape = input_shape
         self._z_dim = latent_dim
+        self.__conv_func_reps = int(input_shape / 16)
 
     @staticmethod
     def conv_func(input_layer):
@@ -25,7 +26,7 @@ class DeepMindEncoder:
     def build(self, vae_gamma, vae_capacity):
         init = x = Input((self._input_shape, self._input_shape, 1))
 
-        for _ in range(4):
+        for _ in range(self.__conv_func_reps):
             x = self.conv_func(x)
 
         x = Flatten()(x)

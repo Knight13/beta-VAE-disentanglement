@@ -71,6 +71,31 @@ def main(args):
     capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.num_epochs)
 
     # ToDo: Build Model
+    if args.pretrained_model is not None:
+        print("Loading pre-trained model.......")
+        model = load_model(args.pretrained_model, custom_objects={'SampleLayer': sample_layer.SampleLayer})
+
+    else:
+        print("Building model.......")
+
+        [enc_input, enc_model] = utils.get_encoder(encoder_name=args.encoder_type, image_size=args.image_size,
+                                                   bottleneck=args.bottleneck, vae_gamma=args.vae_gamma)
+        z = enc_model.output
+
+        dec = decoder.DeepMindDecoder(decoder_input=z, output_shape=args.image_size)
+        dec_output = dec.create_decoder()
+
+        model = Model(inputs=[enc_input], outputs=[dec_output])
+
+    print(model.summary())
+
+    arch_pdf = args.encoder_type + '_model.pdf'
+
+    if arch_pdf not in os.listdir(args.arch_dir):
+        path = os.path.join(args.arch_dir, arch_pdf)
+        plot_model(model, path)
+
+    model.compile(optimizer=optimizer, loss=['mean_squared_error'])
 
     # ToDO: Train model using fit generator
     pass
