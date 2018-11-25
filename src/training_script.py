@@ -66,8 +66,7 @@ def main(args):
 
     # ToDo: Create Custom Callbacks to generate images from test set at the end of each epoch / linearly increase C.
     generator_cb = utils.GenerateImage(test_image_folder=args.test_image_folder, target_dir=args.target_image_dir,
-                                       action=args.preprocess_action, image_shape=args.image_size,
-                                       encoder_name=args.encoder_type)
+                                       image_shape=args.image_size, encoder_name=args.encoder_type)
 
     capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.num_epochs)
 
