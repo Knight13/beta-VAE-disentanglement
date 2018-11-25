@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import warnings
 
-from keras.layers import Input, BatchNormalization, Dense, Flatten, MaxPooling2D
+from keras.layers import Input, BatchNormalization, Dense, Flatten, MaxPooling2D, Activation
 from keras.layers.convolutional import Convolution2D
 from keras.models import Model
 
@@ -19,8 +19,9 @@ class DeepMindEncoder:
 
     @staticmethod
     def conv_func(input_layer):
-        x = Convolution2D(filters=32, kernel_size=4, strides=2, padding='same', activation='relu')(input_layer)
+        x = Convolution2D(filters=32, kernel_size=4, strides=2, padding='same')(input_layer)
         x = BatchNormalization()(x)
+        x = Activation('relu')(x)
         return x
 
     def build(self, vae_gamma, vae_capacity):

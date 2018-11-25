@@ -11,7 +11,7 @@ from keras.callbacks import Callback
 def batch_gen(generator_object):
     while True:
         data = generator_object.next()
-        yield [data[0]], [data[0]]
+        yield [data[0].astype(np.int8)], [data[0].astype(np.int8)]
 
 
 def get_encoder(encoder_name, image_size, bottleneck, vae_gamma):
@@ -48,6 +48,10 @@ class GenerateImage(Callback):
         for image in os.listdir(test_image_folder):
             image = Image.open(os.path.join(test_image_folder, image)).convert('L')
             image = image.resize((image_shape, image_shape), Image.NEAREST)
+            image = np.asarray(image)
+            image = image / 255.
+            image = image.astype(np.int8)
+            image = np.reshape(image, (image_shape, image_shape, -1))
             self.test.append(image)
         super(Callback).__init__()
 
@@ -57,9 +61,14 @@ class GenerateImage(Callback):
     def on_epoch_end(self, epoch, logs=None):
         for image_data in self.test:
             gen_image = self.model.predict(np.array([image_data]))
+            gen_image[gen_image > 0.5] = 1.0
+            gen_image[gen_image <= 0.5] = 0.0
             gen_image = gen_image[0]
-            gen_image = gen_image.astype(np.int8)
+            gen_image = np.uint8(gen_image * 255)
+            gen_image = np.reshape(gen_image, (gen_image.shape[0], gen_image.shape[1]))
             gen_image = np.stack((gen_image,) * 3, axis=2)
+            print(gen_image.shape)
+            print(gen_image)
             self.gen_images.append(Image.fromarray(gen_image))
 
         folder = "epoch_" + str(epoch)
