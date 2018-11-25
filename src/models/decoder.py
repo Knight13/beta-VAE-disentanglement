@@ -1,5 +1,5 @@
 from keras.layers import Convolution2D, UpSampling2D, Deconvolution2D, Reshape, Lambda, BatchNormalization, \
-    Dense
+    Dense, Activation
 
 
 class DeepMindDecoder:
@@ -10,8 +10,9 @@ class DeepMindDecoder:
 
     @staticmethod
     def deconv_func(input_layer):
-        x = Deconvolution2D(32, 4, strides=2, padding='same', activation='relu')(input_layer)
+        x = Deconvolution2D(32, 4, strides=2, padding='same')(input_layer)
         x = BatchNormalization()(x)
+        x = Activation('relu')(x)
         return x
 
     def build(self, encoder_output):
@@ -26,8 +27,6 @@ class DeepMindDecoder:
             x = self.deconv_func(x)
 
         x = Convolution2D(1, (1, 1), padding='same', activation='sigmoid')(x)
-        x = BatchNormalization()(x)
-
         decoded = x
         return decoded
 
