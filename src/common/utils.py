@@ -8,24 +8,10 @@ from keras import optimizers
 from keras.callbacks import Callback
 
 
-def pre_process(image_array, action='simple'):
-    x = np.asarray(image_array)
-    if action == 'simple':
-        y = x - 0.5
-    elif action == 'mean_centered':
-        mean = np.mean(x, axis=(0, 1, 2))
-        std = np.std(x, axis=(0, 1, 2))
-        std_adj = np.maximum(std, 1.0 / np.sqrt(x.size))
-        y = np.multiply(np.subtract(x, mean), 1 / std_adj)
-    else:
-        raise NotImplementedError
-    return y
-
-
-def batch_gen(generator_object, action):
+def batch_gen(generator_object):
     while True:
         data = generator_object.next()
-        yield [pre_process(data[0], action)], [pre_process(data[0], action)]
+        yield [data[0]], [data[0]]
 
 
 def get_encoder(encoder_name, image_size, bottleneck, vae_gamma):
