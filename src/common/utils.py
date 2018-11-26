@@ -77,7 +77,6 @@ class GenerateImage(Callback):
         for idx in range(len(self.gen_images)):
             file_name = self.encoder_name + "_img_" + str(idx) + ".png"
             image = self.gen_images[idx]
-            # image.save(os.path.join(epoch_dir, file_name))
             plt.gray()
             plt.imsave(os.path.join(epoch_dir, file_name), image)
         del self.gen_images
