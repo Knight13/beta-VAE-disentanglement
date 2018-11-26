@@ -1,12 +1,15 @@
 from __future__ import absolute_import
+
 import os
 
-from src.models import encoder
+import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from keras import optimizers
 from keras.callbacks import Callback
 from keras.models import Model
+
+from src.models import encoder
 
 
 def batch_gen(generator_object):
@@ -62,15 +65,9 @@ class GenerateImage(Callback):
     def on_epoch_end(self, epoch, logs=None):
         for image_data in self.test:
             gen_image = self.model.predict(np.array([image_data]))
-            gen_image[gen_image > 0.5] = 1.0
-            gen_image[gen_image <= 0.5] = 0.0
             gen_image = gen_image[0]
-            gen_image = np.uint8(gen_image * 255)
             gen_image = np.reshape(gen_image, (gen_image.shape[0], gen_image.shape[1]))
-            gen_image = np.stack((gen_image,) * 3, axis=2)
-            print(gen_image.shape)
-            print(gen_image)
-            self.gen_images.append(Image.fromarray(gen_image))
+            self.gen_images.append(gen_image)
 
         folder = "epoch_" + str(epoch)
         epoch_dir = os.path.join(self.target_dir, folder)
@@ -80,7 +77,9 @@ class GenerateImage(Callback):
         for idx in range(len(self.gen_images)):
             file_name = self.encoder_name + "_img_" + str(idx) + ".png"
             image = self.gen_images[idx]
-            image.save(os.path.join(epoch_dir, file_name))
+            # image.save(os.path.join(epoch_dir, file_name))
+            plt.gray()
+            plt.imsave(os.path.join(epoch_dir, file_name), image)
         del self.gen_images
         print('Generated images saved in ', self.target_dir)
 
