@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 from keras import optimizers
 from keras.callbacks import Callback
+from keras.models import Model
 
 
 def batch_gen(generator_object):
@@ -98,3 +99,34 @@ class CapacityIncrease(Callback):
             self.current_capacity = self.max_capacity
         print("Updated vae capacity param: ", self.current_capacity)
         self.model.get_layer('sampling_layer').max_capacity = self.current_capacity
+
+
+def get_layer_idx_by_name(model, layername):
+    for idx, layer in enumerate(model.layers):
+        if layer.name == layername:
+            return idx
+
+
+def split_model(model, start, end):
+    confs = model.get_config()
+    weights = {l.name: l.get_weights() for l in model.layers}
+    # split model
+    kept_layers = set()
+    for i, l in enumerate(confs['layers']):
+        if i == 0:
+            confs['layers'][0]['config']['batch_input_shape'] = model.layers[start].input_shape
+        elif i < start or i > end:
+            continue
+        kept_layers.add(l['name'])
+    # filter layers
+    layers = [l for l in confs['layers'] if l['name'] in kept_layers]
+    layers[1]['inbound_nodes'][0][0][0] = layers[0]['name']
+    # set conf
+    confs['layers'] = layers
+    confs['input_layers'][0][0] = layers[0]['name']
+    confs['output_layers'][0][0] = layers[-1]['name']
+    # create new model
+    newModel = Model.from_config(confs)
+    for l in newModel.layers:
+        l.set_weights(weights[l.name])
+    return newModel
