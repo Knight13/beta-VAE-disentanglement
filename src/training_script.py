@@ -135,10 +135,6 @@ def parse_arguments(argv):
                         help='The directory to save the generated images at the end of each epoch.',
                         default='../generated_images/')
 
-    parser.add_argument('--preprocess_action', type=str,
-                        help='The action to be taken for preprocessing - simple or mean_centered.',
-                        default="simple")
-
     parser.add_argument('--bottleneck', type=int,
                         help='The size of the embedding layers.', default=10)
 
