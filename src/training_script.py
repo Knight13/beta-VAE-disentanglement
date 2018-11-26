@@ -15,6 +15,7 @@ from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau
 import time
 from numpy.random import seed
 
+
 seed(1990)
 set_random_seed(1990)
 
