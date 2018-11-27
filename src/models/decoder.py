@@ -6,7 +6,7 @@ class DeepMindDecoder:
     def __init__(self, decoder_input, latent_dim, output_shape):
         self._dec_input = decoder_input
         self._latent_dim = latent_dim
-        self.__dewconv_func_reps = int(output_shape / 16)
+        self.__deconv_func_reps = int(output_shape / 16)
 
     @staticmethod
     def deconv_func(input_layer):
@@ -23,7 +23,7 @@ class DeepMindDecoder:
 
         x = UpSampling2D((4, 4))(x)
 
-        for _ in range(self.__dewconv_func_reps):
+        for _ in range(self.__deconv_func_reps):
             x = self.deconv_func(x)
 
         x = Convolution2D(3, (1, 1), padding='same', activation='tanh')(x)
