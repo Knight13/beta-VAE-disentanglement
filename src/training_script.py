@@ -19,6 +19,10 @@ from numpy.random import seed
 seed(1990)
 set_random_seed(1990)
 
+os.environ['TF_MIN_GPU_MULTIPROCESSOR_COUNT'] = "3"
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
+
 
 def main(args):
     optimizer = utils.select_optimizer(optimizer=args.optimizer, base_learning_rate=args.base_learning_rate)
@@ -31,7 +35,6 @@ def main(args):
     train_generator = data_gen.flow_from_directory(
         args.data_dir,
         target_size=(args.image_size, args.image_size),
-        color_mode='grayscale',
         batch_size=args.train_batch_size,
         class_mode='categorical',
         subset='training')
@@ -39,7 +42,6 @@ def main(args):
     validation_generator = data_gen.flow_from_directory(
         args.data_dir,
         target_size=(args.image_size, args.image_size),
-        color_mode='grayscale',
         batch_size=args.val_batch_size,
         class_mode='categorical',
         subset='validation')
@@ -69,7 +71,7 @@ def main(args):
     generator_cb = utils.GenerateImage(test_image_folder=args.test_image_folder, target_dir=args.gen_image_dir,
                                        image_shape=args.image_size, encoder_name=args.encoder_type)
 
-    capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.num_epochs)
+    capacity_cb = utils.CapacityIncrease(max_capacity=args.capacity, max_epochs=args.max_epochs)
 
     if args.pretrained_model is not None:
         print("Loading pre-trained model.......")
@@ -95,7 +97,7 @@ def main(args):
         path = os.path.join(args.arch_dir, arch_pdf)
         plot_model(model, path)
 
-    model.compile(optimizer=optimizer, loss=['binary_crossentropy'])
+    model.compile(optimizer=optimizer, loss=['mean_squared_error'])
 
     model.fit_generator(training_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
                         validation_data=validation_generator, validation_steps=validation_steps,
@@ -144,16 +146,16 @@ def parse_arguments(argv):
                         default=0.2)
 
     parser.add_argument('--image_size', type=int,
-                        help='Size of the input image',
+                        help='Size of the input image. Only (64, 64) is supported.',
                         default=64)
 
     parser.add_argument('--train_batch_size', type=int,
                         help='Batch size for training.',
-                        default=512)
+                        default=64)
 
     parser.add_argument('--val_batch_size', type=int,
                         help='Batch size for validation.',
-                        default=256)
+                        default=32)
 
     parser.add_argument('--optimizer', type=str, choices=['ADAGRAD', 'ADADELTA', 'ADAM', 'RMSPROP', 'SGD'],
                         help='The optimization algorithm to use', default='ADAM')
@@ -164,7 +166,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--num_epochs', type=int,
                         help='The total number of epochs for training.',
-                        default=200)
+                        default=300)
 
     parser.add_argument('--scheduler_epoch', type=int,
                         help='The number of epochs to wait for the val loss to improve.',
@@ -180,7 +182,11 @@ def parse_arguments(argv):
 
     parser.add_argument('--capacity', type=float,
                         help='The latent space capacity.',
-                        default=50.0)
+                        default=25.0)
+
+    parser.add_argument('--max_epochs', type=float,
+                        help='The maximum epoch to linearly increase the vae capacity.',
+                        default=100)
 
     return parser.parse_args(argv)
 

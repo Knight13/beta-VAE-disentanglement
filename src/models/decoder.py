@@ -26,7 +26,7 @@ class DeepMindDecoder:
         for _ in range(self.__dewconv_func_reps):
             x = self.deconv_func(x)
 
-        x = Convolution2D(3, (1, 1), padding='same', activation='sigmoid')(x)
+        x = Convolution2D(3, (1, 1), padding='same', activation='tanh')(x)
         decoded = x
         return decoded
 
