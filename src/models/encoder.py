@@ -31,16 +31,18 @@ class DeepMindEncoder:
             x = self.conv_func(x)
 
         x = Flatten()(x)
-        x = Dense(units=256, activation='relu')(x)
+
+        x = Dense(units=256)(x)
         x = BatchNormalization()(x)
-        x = Dense(units=256, activation='relu')(x)
+        x = Activation('relu')(x)
+        x = Dense(units=256)(x)
         x = BatchNormalization()(x)
+        x = Activation('relu')(x)
         x = Dense(units=self._z_dim * 2, activation='linear')(x)
-        x = BatchNormalization()(x)
         # Beta-VAE implementation as follows
 
-        z_mean = Dense(units=self._z_dim, activation='linear')(x)
-        z_log_var = Dense(units=self._z_dim, activation='linear')(x)
+        z_mean = Dense(units=self._z_dim, activation='linear', name='sample_mean')(x)
+        z_log_var = Dense(units=self._z_dim, activation='linear', name='sample_log_var')(x)
         embed_layer = sample_layer.SampleLayer(gamma=vae_gamma, capacity=vae_capacity, name='sampling_layer')([z_mean,
                                                                                                                z_log_var])
         return init, embed_layer

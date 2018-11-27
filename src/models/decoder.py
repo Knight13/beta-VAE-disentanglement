@@ -9,30 +9,33 @@ class DeepMindDecoder:
         self.__deconv_func_reps = int(output_shape / 16)
 
     @staticmethod
-    def deconv_func(input_layer):
-        x = Deconvolution2D(32, 4, strides=2, padding='same')(input_layer)
+    def deconv_func(input_layer, pad_mode='same'):
+        x = Deconvolution2D(32, 4, strides=2, padding=pad_mode)(input_layer)
         x = BatchNormalization()(x)
         x = Activation('relu')(x)
         return x
 
     def build(self, encoder_output):
-        x = Reshape((self._latent_dim,), input_shape=(self._latent_dim,))(encoder_output)
-        x = Dense(units=256, activation='relu', name='decoder_inp')(x)
+        x = Dense(units=256)(encoder_output)
         x = BatchNormalization()(x)
-        x = Dense(units=256, activation='relu')(x)
+        x = Activation('relu')(x)
+        x = Dense(units=256)(x)
         x = BatchNormalization()(x)
-        x = Reshape((-1, 1, 256), input_shape=(256,))(x)
+        x = Activation('relu')(x)
+        x = Dense(units=512, activation='relu')(x)
+        x = BatchNormalization()(x)
+        x = Reshape((-1, 1, 512), input_shape=(512,))(x)
 
-        x = UpSampling2D((4, 4))(x)
-
-        for _ in range(self.__deconv_func_reps):
-            x = self.deconv_func(x)
-
-        x = Convolution2D(3, (1, 1), padding='same', activation='tanh')(x)
+        for i in range(self.__deconv_func_reps):
+            if i == 0:
+                x = self.deconv_func(x, pad_mode='valid')
+            else:
+                x = self.deconv_func(x)
+        x = Deconvolution2D(3, 4, strides=2, padding='same', activation='tanh')(x)
         decoded = x
         return decoded
 
     def create_decoder(self):
-        input_dec = Lambda(lambda x: x)(self._dec_input)
+        input_dec = Lambda(lambda x: x, name='decoder_inp')(self._dec_input)
 
         return self.build(encoder_output=input_dec)
