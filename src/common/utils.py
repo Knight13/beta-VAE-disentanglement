@@ -12,6 +12,12 @@ from keras.models import Model
 from src.models import encoder
 
 
+def pre_process(image_array):
+    x = np.asarray(image_array)
+    y = x - 0.5
+    return y
+
+
 def batch_gen(generator_object):
     while True:
         data = generator_object.next()
@@ -50,12 +56,11 @@ class GenerateImage(Callback):
         self.target_dir = target_dir
         self.encoder_name = encoder_name
         for image in os.listdir(test_image_folder):
-            image = Image.open(os.path.join(test_image_folder, image)).convert('L')
+            image = Image.open(os.path.join(test_image_folder, image))
             image = image.resize((image_shape, image_shape), Image.NEAREST)
             image = np.asarray(image)
             image = image / 255.
-            image = image.astype(np.int8)
-            image = np.reshape(image, (image_shape, image_shape, -1))
+            image = pre_process(image)
             self.test.append(image)
         super(Callback).__init__()
 
@@ -65,9 +70,11 @@ class GenerateImage(Callback):
     def on_epoch_end(self, epoch, logs=None):
         for image_data in self.test:
             gen_image = self.model.predict(np.array([image_data]))
+            gen_image[gen_image > 0.5] = 0.5
+            gen_image[gen_image < -0.5] = -0.5
+            gen_image = np.uint8((gen_image + 0.5) * 255)
             gen_image = gen_image[0]
-            gen_image = np.reshape(gen_image, (gen_image.shape[0], gen_image.shape[1]))
-            self.gen_images.append(gen_image)
+            self.gen_images.append(Image.fromarray(gen_image))
 
         folder = "epoch_" + str(epoch)
         epoch_dir = os.path.join(self.target_dir, folder)
@@ -77,8 +84,7 @@ class GenerateImage(Callback):
         for idx in range(len(self.gen_images)):
             file_name = self.encoder_name + "_img_" + str(idx) + ".png"
             image = self.gen_images[idx]
-            plt.gray()
-            plt.imsave(os.path.join(epoch_dir, file_name), image)
+            image.save(os.path.join(epoch_dir, file_name))
         del self.gen_images
         print('Generated images saved in ', self.target_dir)
 
