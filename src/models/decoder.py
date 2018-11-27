@@ -17,8 +17,10 @@ class DeepMindDecoder:
 
     def build(self, encoder_output):
         x = Reshape((self._latent_dim,), input_shape=(self._latent_dim,))(encoder_output)
-        x = Dense(units=256, activation='linear', name='decoder_inp')(x)
-        x = Dense(units=256, activation='linear')(x)
+        x = Dense(units=256, activation='relu', name='decoder_inp')(x)
+        x = BatchNormalization()(x)
+        x = Dense(units=256, activation='relu')(x)
+        x = BatchNormalization()(x)
         x = Reshape((-1, 1, 256), input_shape=(256,))(x)
 
         x = UpSampling2D((4, 4))(x)

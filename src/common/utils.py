@@ -21,7 +21,7 @@ def pre_process(image_array):
 def batch_gen(generator_object):
     while True:
         data = generator_object.next()
-        yield [data[0].astype(np.int8)], [data[0].astype(np.int8)]
+        yield [pre_process(data[0])], [pre_process(data[0])]
 
 
 def get_encoder(encoder_name, image_size, bottleneck, vae_gamma):
