@@ -101,7 +101,8 @@ def main(args):
 
     model.fit_generator(training_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
                         validation_data=validation_generator, validation_steps=validation_steps,
-                        callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule])
+                        callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule],
+                        workers=args.num_workers, use_multiprocessing=True)
 
 
 def parse_arguments(argv):
@@ -139,7 +140,8 @@ def parse_arguments(argv):
                         default='../generated_images/')
 
     parser.add_argument('--bottleneck', type=int,
-                        help='The size of the embedding layers.', default=10)
+                        help='The size of the embedding layers.',
+                        default=32)
 
     parser.add_argument('--val_split', type=float,
                         help='The percentage of generated_data in the validation set',
@@ -166,7 +168,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--num_epochs', type=int,
                         help='The total number of epochs for training.',
-                        default=300)
+                        default=50)
 
     parser.add_argument('--scheduler_epoch', type=int,
                         help='The number of epochs to wait for the val loss to improve.',
@@ -186,7 +188,11 @@ def parse_arguments(argv):
 
     parser.add_argument('--max_epochs', type=float,
                         help='The maximum epoch to linearly increase the vae capacity.',
-                        default=100)
+                        default=40)
+
+    parser.add_argument('--num_workers', type=float,
+                        help='The number of workers to use during training.',
+                        default=4)
 
     return parser.parse_args(argv)
 

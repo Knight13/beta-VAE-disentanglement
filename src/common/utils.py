@@ -12,16 +12,23 @@ from keras.models import Model
 from src.models import encoder
 
 
-def pre_process(image_array):
+def pre_process_input(image_array):
     x = np.asarray(image_array)
     y = x - 0.5
     return y
 
 
+def post_process_output(generated_image):
+    generated_image[generated_image > 0.5] = 0.5
+    generated_image[generated_image < -0.5] = -0.5
+    gen_image = np.uint8((generated_image + 0.5) * 255)
+    return gen_image
+
+
 def batch_gen(generator_object):
     while True:
         data = generator_object.next()
-        yield [pre_process(data[0])], [pre_process(data[0])]
+        yield [pre_process_input(data[0])], [pre_process_input(data[0])]
 
 
 def get_encoder(encoder_name, image_size, bottleneck, vae_gamma):
@@ -60,7 +67,7 @@ class GenerateImage(Callback):
             image = image.resize((image_shape, image_shape), Image.NEAREST)
             image = np.asarray(image)
             image = image / 255.
-            image = pre_process(image)
+            image = pre_process_input(image)
             self.test.append(image)
         super(Callback).__init__()
 
@@ -70,9 +77,7 @@ class GenerateImage(Callback):
     def on_epoch_end(self, epoch, logs=None):
         for image_data in self.test:
             gen_image = self.model.predict(np.array([image_data]))
-            gen_image[gen_image > 0.5] = 0.5
-            gen_image[gen_image < -0.5] = -0.5
-            gen_image = np.uint8((gen_image + 0.5) * 255)
+            gen_image = post_process_output(gen_image)
             gen_image = gen_image[0]
             self.gen_images.append(Image.fromarray(gen_image))
 
