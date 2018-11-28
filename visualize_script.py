@@ -16,7 +16,7 @@ def main(args):
 
     enc_out = enc_model.predict(enc_inp)
 
-    traversal_range = np.arange(args.start_range, args, 1/float(args.traversal_steps))
+    traversal_range = np.arange(args.start_range, args.end_range, 1/float(args.traversal_steps))
 
     dec_inp = list(enc_out.ravel())
 
