@@ -1,11 +1,12 @@
-from conifg import enc_model, dec_model
-import imageio
-import os
 import argparse
 import sys
+
+import imageio
 import numpy as np
-from src.common import utils
 from PIL import Image
+
+from conifg import enc_model, dec_model
+from src.common import utils
 
 
 def main(args):
@@ -28,7 +29,7 @@ def main(args):
         for val in list(traversal_range):
             inp[emb_dim] = val
             inp_arr = np.array(inp)
-            inp_arr = inp_arr.reshape((-1, len(traversal_range)))
+            inp_arr = inp_arr.reshape((-1, len(dec_inp)))
             dec_out = dec_model.predict(inp_arr)
             images.append(dec_out[0])
         name = 'z_' + str(emb_dim+1) + '.gif'
