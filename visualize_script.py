@@ -8,6 +8,8 @@ from PIL import Image
 from conifg import enc_model, dec_model
 from src.common import utils
 
+print(enc_model.summary())
+
 
 def main(args):
     test_image = Image.open(args.test_image)
@@ -17,7 +19,7 @@ def main(args):
 
     enc_out = enc_model.predict(enc_inp)
 
-    traversal_range = np.arange(args.start_range, args.end_range, 1/float(args.traversal_steps))
+    traversal_range = np.arange(args.start_range, args.end_range, 1 / float(args.traversal_steps))
 
     dec_inp = list(enc_out.ravel())
 
@@ -31,8 +33,10 @@ def main(args):
             inp_arr = np.array(inp)
             inp_arr = inp_arr.reshape((-1, len(dec_inp)))
             dec_out = dec_model.predict(inp_arr)
-            images.append(dec_out[0])
-        name = 'z_' + str(emb_dim+1) + '.gif'
+            dec_out = utils.post_process_output(dec_out)
+            dec_out = dec_out[0]
+            images.append(dec_out)
+        name = 'z_' + str(emb_dim + 1) + '.gif'
         imageio.mimsave(name, images)
 
 
@@ -41,7 +45,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image', type=str,
                         help='The image to produce the traversals on.',
-                        default=None)
+                        default='test_images/038065.jpg')
 
     parser.add_argument('--start_range', type=int,
                         help='The starting point of the traversal range.',
@@ -53,7 +57,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--traversal_steps', type=float,
                         help='The number of steps in the traversal range.',
-                        default=100)
+                        default=10)
 
     parser.add_argument('--image_size', type=int,
                         help='Size of the input image. Only (64, 64) is supported.',
