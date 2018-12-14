@@ -45,7 +45,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image', type=str,
                         help='The image to produce the traversals on.',
-                        default='test_images/038065.jpg')
+                        default='test_images/031888.jpg')
 
     parser.add_argument('--start_range', type=int,
                         help='The starting point of the traversal range.',
@@ -57,7 +57,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--traversal_steps', type=float,
                         help='The number of steps in the traversal range.',
-                        default=10)
+                        default=5)
 
     parser.add_argument('--image_size', type=int,
                         help='Size of the input image. Only (64, 64) is supported.',
