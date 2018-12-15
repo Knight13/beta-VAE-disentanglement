@@ -45,7 +45,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image', type=str,
                         help='The image to produce the traversals on.',
-                        default='test_images/031888.jpg')
+                        default='test_images/000002.jpg')
 
     parser.add_argument('--start_range', type=int,
                         help='The starting point of the traversal range.',

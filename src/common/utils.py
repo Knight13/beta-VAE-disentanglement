@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 import os
 
-import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from keras import optimizers

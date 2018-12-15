@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import warnings
 
-from keras.layers import Input, BatchNormalization, Dense, Flatten, MaxPooling2D, Activation
+from keras.layers import Input, BatchNormalization, Dense, Flatten, Activation
 from keras.layers.convolutional import Convolution2D
 from keras.models import Model
 
