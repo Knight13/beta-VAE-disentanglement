@@ -1,7 +1,7 @@
 from keras.models import load_model, Model
 from src.common import sample_layer, utils
 
-model_path = "saved_models/deepmind_enc_vae11122018.hdf5"
+model_path = '/path/to/saved_model/'
 vae_model = load_model(model_path, custom_objects={'SampleLayer': sample_layer.SampleLayer})
 encoder_output_layer = 'sampling_layer'
 decoder_input_layer = 'decoder_inp'

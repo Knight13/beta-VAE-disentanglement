@@ -23,7 +23,7 @@ class SampleLayer(Layer):
         mean = inputs[0]
         log_var = inputs[1]
 
-        latent_loss = - 0.5 * K.mean(1 + log_var - K.square(mean) - K.exp(log_var), axis=-1)
+        latent_loss = -0.5 * K.mean(1 + log_var - K.square(mean) - K.exp(log_var), axis=-1)
         latent_loss = self.gamma * K.abs(latent_loss - self.max_capacity)
 
         latent_loss = K.reshape(latent_loss, [1, 1])

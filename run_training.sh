@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+"TF_MIN_GPU_MULTIPROCESSOR_COUNT" = "3"
+"CUDA_VISIBLE_DEVICES" = "0, 1"
+
 cd src
 
 python training_script.py --encoder_type deepmind_enc --data_dir ../../data/CelebA/train/ --bottleneck 32 --val_split 0.2 \

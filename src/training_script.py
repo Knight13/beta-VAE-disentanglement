@@ -19,10 +19,6 @@ from numpy.random import seed
 seed(1990)
 set_random_seed(1990)
 
-os.environ['TF_MIN_GPU_MULTIPROCESSOR_COUNT'] = "3"
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
-
 
 def main(args):
     optimizer = utils.select_optimizer(optimizer=args.optimizer, base_learning_rate=args.base_learning_rate)
