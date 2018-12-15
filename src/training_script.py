@@ -56,7 +56,8 @@ def main(args):
     lr_schedule = ReduceLROnPlateau(monitor='val_loss', factor=args.decay_factor,
                                     mode='min', patience=args.scheduler_epoch, min_lr=1e-010)
 
-    tb = TensorBoard(log_dir=args.graph_dir, histogram_freq=0, write_graph=True, write_images=True)
+    tb = TensorBoard(log_dir=args.graph_dir, histogram_freq=0, write_graph=True, write_images=True,
+                     embeddings_layer_names=['sampling_layer'])
 
     timestamp = time.strftime("%d%m%Y", time.localtime())
 
