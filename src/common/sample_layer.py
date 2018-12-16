@@ -23,8 +23,8 @@ class SampleLayer(Layer):
         mean = inputs[0]
         log_var = inputs[1]
 
-        # ToDo: K.sum(, axis=1) -> K.mean(, axis=0)
-        latent_loss = -0.5 * K.mean(1 + log_var - K.square(mean) - K.exp(log_var), axis=-1)
+        latent_loss = -0.5 * (1 + log_var - K.square(mean) - K.exp(log_var))
+        latent_loss = K.mean(K.sum(latent_loss, axis=1, keepdims=True), axis=0)
         latent_loss = self.gamma * K.abs(latent_loss - self.max_capacity)
 
         latent_loss = K.reshape(latent_loss, [1, 1])
@@ -35,7 +35,7 @@ class SampleLayer(Layer):
         epsilon = K.random_normal(shape=(batch, dim), mean=0., stddev=1.)
         out = mean + K.exp(0.5 * log_var) * epsilon
 
-        self.add_loss(latent_loss, [mean, log_var])
+        self.add_loss(latent_loss, out)
 
         return out
 

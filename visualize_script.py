@@ -1,5 +1,6 @@
 import argparse
 import sys
+import os
 
 import imageio
 import numpy as np
@@ -8,10 +9,13 @@ from PIL import Image
 from conifg import enc_model, dec_model
 from src.common import utils
 
-print(enc_model.summary())
-
 
 def main(args):
+    save_folder = os.path.join(args.save_dir, args.test_image.split('.')[0].split('/')[-1])
+
+    if not os.path.exists(save_folder):
+        os.mkdir(save_folder)
+
     test_image = Image.open(args.test_image)
     enc_inp = test_image.resize((args.image_size, args.image_size), Image.NEAREST)
     enc_inp = np.array([np.asarray(enc_inp) / 255.])
@@ -37,7 +41,8 @@ def main(args):
             dec_out = dec_out[0]
             images.append(dec_out)
         name = 'z_' + str(emb_dim + 1) + '.gif'
-        imageio.mimsave(name, images)
+        full_name_path = os.path.join(save_folder, name)
+        imageio.mimsave(full_name_path, images)
 
 
 def parse_arguments(argv):
@@ -45,7 +50,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image', type=str,
                         help='The image to produce the traversals on.',
-                        default='test_images/000002.jpg')
+                        default=None)
 
     parser.add_argument('--start_range', type=int,
                         help='The starting point of the traversal range.',
@@ -57,11 +62,15 @@ def parse_arguments(argv):
 
     parser.add_argument('--traversal_steps', type=float,
                         help='The number of steps in the traversal range.',
-                        default=5)
+                        default=10)
 
     parser.add_argument('--image_size', type=int,
                         help='Size of the input image. Only (64, 64) is supported.',
                         default=64)
+
+    parser.add_argument('--save_dir', type=str,
+                        help='The directory to save the generated gifs.',
+                        default='generated_gifs')
 
     return parser.parse_args(argv)
 
