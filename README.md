@@ -74,6 +74,7 @@ Input image :
 Traversals (left to right):
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
@@ -90,6 +91,7 @@ Input image :
 Traversals (left to right):
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
@@ -106,6 +108,7 @@ Input image :
 Traversals (left to right):
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
@@ -122,6 +125,7 @@ Input image:
 Traversals (left to right):
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
@@ -140,6 +144,7 @@ Input image :
 Traversals (left to right):
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](generated_gifs/3dchairs_test_1/z_1.gif)|![](generated_gifs/3dchairs_test_1/z_2.gif)|![](generated_gifs/3dchairs_test_1/z_3.gif)|![](generated_gifs/3dchairs_test_1/z_4.gif)|
 |![](generated_gifs/3dchairs_test_1/z_5.gif)|![](generated_gifs/3dchairs_test_1/z_6.gif)|![](generated_gifs/3dchairs_test_1/z_7.gif)|![](generated_gifs/3dchairs_test_1/z_8.gif)|
 |![](generated_gifs/3dchairs_test_1/z_9.gif)|![](generated_gifs/3dchairs_test_1/z_10.gif)|![](generated_gifs/3dchairs_test_1/z_11.gif)|![](generated_gifs/3dchairs_test_1/z_12.gif)|
@@ -152,6 +157,7 @@ Input image :
 Traversals (left to right): 
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](generated_gifs/3dchairs_test_2/z_1.gif)|![](generated_gifs/3dchairs_test_2/z_2.gif)|![](generated_gifs/3dchairs_test_2/z_3.gif)|![](generated_gifs/3dchairs_test_2/z_4.gif)|
 |![](generated_gifs/3dchairs_test_2/z_5.gif)|![](generated_gifs/3dchairs_test_2/z_6.gif)|![](generated_gifs/3dchairs_test_2/z_7.gif)|![](generated_gifs/3dchairs_test_2/z_8.gif)|
 |![](generated_gifs/3dchairs_test_2/z_9.gif)|![](generated_gifs/3dchairs_test_2/z_10.gif)|![](generated_gifs/3dchairs_test_2/z_11.gif)|![](generated_gifs/3dchairs_test_2/z_12.gif)|
@@ -164,6 +170,7 @@ Input image (left to right):
 Traversals: 
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](generated_gifs/3dchairs_test_3/z_1.gif)|![](generated_gifs/3dchairs_test_3/z_2.gif)|![](generated_gifs/3dchairs_test_3/z_3.gif)|![](generated_gifs/3dchairs_test_3/z_4.gif)|
 |![](generated_gifs/3dchairs_test_3/z_5.gif)|![](generated_gifs/3dchairs_test_3/z_6.gif)|![](generated_gifs/3dchairs_test_3/z_7.gif)|![](generated_gifs/3dchairs_test_3/z_8.gif)|
 |![](generated_gifs/3dchairs_test_3/z_9.gif)|![](generated_gifs/3dchairs_test_3/z_10.gif)|![](generated_gifs/3dchairs_test_3/z_11.gif)|![](generated_gifs/3dchairs_test_3/z_12.gif)|
@@ -176,6 +183,7 @@ Input image :
 Traversals (left to right): 
 
 | | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](generated_gifs/3dchairs_test_4/z_1.gif)|![](generated_gifs/3dchairs_test_4/z_2.gif)|![](generated_gifs/3dchairs_test_4/z_3.gif)|![](generated_gifs/3dchairs_test_4/z_4.gif)|
 |![](generated_gifs/3dchairs_test_4/z_5.gif)|![](generated_gifs/3dchairs_test_4/z_6.gif)|![](generated_gifs/3dchairs_test_4/z_7.gif)|![](generated_gifs/3dchairs_test_4/z_8.gif)|
 |![](generated_gifs/3dchairs_test_4/z_9.gif)|![](generated_gifs/3dchairs_test_4/z_10.gif)|![](generated_gifs/3dchairs_test_4/z_11.gif)|![](generated_gifs/3dchairs_test_4/z_12.gif)|
