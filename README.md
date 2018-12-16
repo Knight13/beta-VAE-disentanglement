@@ -137,11 +137,11 @@ Traversals (left to right):
 
 2) 3D-Chairs :
 
-Input image (left to right): 
+Input image : 
 
 ![](test_images/3D_Chairs/3dchairs_test_1.png)
 
-Traversals :
+Traversals (left to right):
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
@@ -150,11 +150,11 @@ Traversals :
 |![](generated_gifs/3dchairs_test_1/z_9.gif)|![](generated_gifs/3dchairs_test_1/z_10.gif)|![](generated_gifs/3dchairs_test_1/z_11.gif)|![](generated_gifs/3dchairs_test_1/z_12.gif)|
 |![](generated_gifs/3dchairs_test_1/z_13.gif)|![](generated_gifs/3dchairs_test_1/z_14.gif)|![](generated_gifs/3dchairs_test_1/z_15.gif)|![](generated_gifs/3dchairs_test_1/z_16.gif)|
 
-Input image (left to right): 
+Input image : 
 
 ![](test_images/3D_Chairs/3dchairs_test_2.png)
 
-Traversals: 
+Traversals (left to right): 
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
@@ -176,7 +176,7 @@ Traversals:
 |![](generated_gifs/3dchairs_test_3/z_9.gif)|![](generated_gifs/3dchairs_test_3/z_10.gif)|![](generated_gifs/3dchairs_test_3/z_11.gif)|![](generated_gifs/3dchairs_test_3/z_12.gif)|
 |![](generated_gifs/3dchairs_test_3/z_13.gif)|![](generated_gifs/3dchairs_test_3/z_14.gif)|![](generated_gifs/3dchairs_test_3/z_15.gif)|![](generated_gifs/3dchairs_test_3/z_16.gif)|
 
-Input image (left to right): 
+Input image : 
 
 ![](test_images/3D_Chairs/3dchairs_test_4.png)
 
