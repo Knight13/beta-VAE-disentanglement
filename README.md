@@ -67,101 +67,79 @@ python visualize_script.py --test_image path/to/test_image --start_range -3 --en
 
 1) Celeb-A :
 
-Input image : ![](test_images/Celeb_A/celeba_test_1.jpg)
+Input image : 
 
-Traversals :
+![](test_images/Celeb_A/celeba_test_1.jpg)
 
-| | | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_1* | *z_2* | *z_3* | *z_4* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_5* | *z_6* | *z_7* | *z_8* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_9* | *z_10* | *z_11* | *z_12* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_13* | *z_14* | *z_15* | *z_16* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_17* | *z_18* | *z_19* | *z_20* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_21* | *z_22* | *z_23* | *z_24* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_25* | *z_26* | *z_27* | *z_28* |
-|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_29* | *z_30* | *z_31* | *z_32* |
-
-Input image : ![](test_images/Celeb_A/celeba_test_2.jpg)
-
-Traversals :
+Traversals (left to right):
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_1* | *z_2* | *z_3* | *z_4* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_5* | *z_6* | *z_7* | *z_8* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_9* | *z_10* | *z_11* | *z_12* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_13* | *z_14* | *z_15* | *z_16* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_17* | *z_18* | *z_19* | *z_20* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_21* | *z_22* | *z_23* | *z_24* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_25* | *z_26* | *z_27* | *z_28* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_29* | *z_30* | *z_31* | *z_32* |
 
-Input image : ![](test_images/Celeb_A/celeba_test_3.jpg)
+Input image : 
 
-Traversals :
+![](test_images/Celeb_A/celeba_test_2.jpg)
+
+Traversals (left to right):
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_1* | *z_2* | *z_3* | *z_4* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_5* | *z_6* | *z_7* | *z_8* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_9* | *z_10* | *z_11* | *z_12* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_13* | *z_14* | *z_15* | *z_16* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_17* | *z_18* | *z_19* | *z_20* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_21* | *z_22* | *z_23* | *z_24* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_25* | *z_26* | *z_27* | *z_28* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_29* | *z_30* | *z_31* | *z_32* |
 
-Input image: ![](test_images/Celeb_A/celeba_test_4.jpg)
+Input image : 
 
-Traversals:
+![](test_images/Celeb_A/celeba_test_3.jpg)
+
+Traversals (left to right):
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_1* | *z_2* | *z_3* | *z_4* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_5* | *z_6* | *z_7* | *z_8* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_9* | *z_10* | *z_11* | *z_12* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_13* | *z_14* | *z_15* | *z_16* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_17* | *z_18* | *z_19* | *z_20* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_21* | *z_22* | *z_23* | *z_24* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_25* | *z_26* | *z_27* | *z_28* |
 |![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
-| *z_29* | *z_30* | *z_31* | *z_32* |
+
+Input image: 
+
+![](test_images/Celeb_A/celeba_test_4.jpg)
+
+Traversals (left to right):
+
+| | | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
+|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|![](test_images/Celeb_A/celeba_test_1.jpg)|
 
 2) 3D-Chairs :
 
-Input image : ![](test_images/3D_Chairs/3dchairs_test_1.png)
+Input image (left to right): 
+
+![](test_images/3D_Chairs/3dchairs_test_1.png)
 
 Traversals :
 
@@ -172,7 +150,9 @@ Traversals :
 |![](generated_gifs/3dchairs_test_1/z_9.gif)|![](generated_gifs/3dchairs_test_1/z_10.gif)|![](generated_gifs/3dchairs_test_1/z_11.gif)|![](generated_gifs/3dchairs_test_1/z_12.gif)|
 |![](generated_gifs/3dchairs_test_1/z_13.gif)|![](generated_gifs/3dchairs_test_1/z_14.gif)|![](generated_gifs/3dchairs_test_1/z_15.gif)|![](generated_gifs/3dchairs_test_1/z_16.gif)|
 
-Input image: ![](test_images/3D_Chairs/3dchairs_test_2.png)
+Input image (left to right): 
+
+![](test_images/3D_Chairs/3dchairs_test_2.png)
 
 Traversals: 
 
@@ -183,7 +163,9 @@ Traversals:
 |![](generated_gifs/3dchairs_test_2/z_9.gif)|![](generated_gifs/3dchairs_test_2/z_10.gif)|![](generated_gifs/3dchairs_test_2/z_11.gif)|![](generated_gifs/3dchairs_test_2/z_12.gif)|
 |![](generated_gifs/3dchairs_test_2/z_13.gif)|![](generated_gifs/3dchairs_test_2/z_14.gif)|![](generated_gifs/3dchairs_test_2/z_15.gif)|![](generated_gifs/3dchairs_test_2/z_16.gif)|
 
-Input image: ![](test_images/3D_Chairs/3dchairs_test_3.png)
+Input image (left to right): 
+
+![](test_images/3D_Chairs/3dchairs_test_3.png)
 
 Traversals: 
 
@@ -194,9 +176,11 @@ Traversals:
 |![](generated_gifs/3dchairs_test_3/z_9.gif)|![](generated_gifs/3dchairs_test_3/z_10.gif)|![](generated_gifs/3dchairs_test_3/z_11.gif)|![](generated_gifs/3dchairs_test_3/z_12.gif)|
 |![](generated_gifs/3dchairs_test_3/z_13.gif)|![](generated_gifs/3dchairs_test_3/z_14.gif)|![](generated_gifs/3dchairs_test_3/z_15.gif)|![](generated_gifs/3dchairs_test_3/z_16.gif)|
 
-Input image: ![](test_images/3D_Chairs/3dchairs_test_4.png)
+Input image (left to right): 
 
-Traversals: 
+![](test_images/3D_Chairs/3dchairs_test_4.png)
+
+Traversals (left to right): 
 
 | | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
