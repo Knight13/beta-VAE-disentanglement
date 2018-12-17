@@ -62,7 +62,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--traversal_steps', type=float,
                         help='The number of steps in the traversal range.',
-                        default=10)
+                        default=5)
 
     parser.add_argument('--image_size', type=int,
                         help='Size of the input image. Only (64, 64) is supported.',

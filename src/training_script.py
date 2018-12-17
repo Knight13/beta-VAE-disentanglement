@@ -56,8 +56,7 @@ def main(args):
     lr_schedule = ReduceLROnPlateau(monitor='val_loss', factor=args.decay_factor,
                                     mode='min', patience=args.scheduler_epoch, min_lr=1e-010)
 
-    tb = TensorBoard(log_dir=args.graph_dir, histogram_freq=0, write_graph=True, write_images=True,
-                     embeddings_layer_names=['sampling_layer'])
+    tb = TensorBoard(log_dir=args.graph_dir, histogram_freq=0, write_graph=True, write_images=True)
 
     timestamp = time.strftime("%d%m%Y", time.localtime())
 
@@ -130,7 +129,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image_folder', type=str,
                         help='The directory of the test images.',
-                        default='../test_images/')
+                        default='../test_images/Celeb_A/')
 
     parser.add_argument('--gen_image_dir', type=str,
                         help='The directory to save the generated images at the end of each epoch.',
@@ -154,7 +153,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--val_batch_size', type=int,
                         help='Batch size for validation.',
-                        default=32)
+                        default=64)
 
     parser.add_argument('--optimizer', type=str, choices=['ADAGRAD', 'ADADELTA', 'ADAM', 'RMSPROP', 'SGD'],
                         help='The optimization algorithm to use', default='ADAM')
@@ -181,7 +180,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--capacity', type=float,
                         help='The latent space capacity.',
-                        default=25.0)
+                        default=50.0)
 
     parser.add_argument('--max_epochs', type=float,
                         help='The maximum epoch to linearly increase the vae capacity.',
@@ -189,7 +188,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--num_workers', type=float,
                         help='The number of workers to use during training.',
-                        default=4)
+                        default=8)
 
     return parser.parse_args(argv)
 
