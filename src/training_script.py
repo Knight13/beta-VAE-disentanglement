@@ -96,7 +96,7 @@ def main(args):
     model.compile(optimizer=optimizer, loss=['mean_squared_error'])
 
     model.fit_generator(training_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
-                        validation_data=validation_generator, validation_steps=validation_steps,
+                        validation_data=next(validation_generator), validation_steps=validation_steps,
                         callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule],
                         workers=args.num_workers, use_multiprocessing=True)
 
