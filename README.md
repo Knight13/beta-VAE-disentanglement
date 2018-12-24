@@ -40,14 +40,14 @@ The training_script.py can directly run from the src directory as:
 ```
 python training_script.py --data_dir path/to/Celeb_A_data_dir --bottleneck 32 --val_split 0.2 \
 --train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 50 \
---scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 25 --max_epochs 40 --num_workers 8 
+--scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 40 --num_workers 8 
 ```
 2) For 3D-chairs data set:
 
 ```
 python training_script.py --data_dir path/to/3D_Chairs_data_dir --bottleneck 16 --val_split 0.2 \
 --train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 50 \
---scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 25 --max_epochs 40 --num_workers 8
+--scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 40 --num_workers 8
 ```
 ### For visualizing 
 Firstly mention the path to the saved model in config.py. To visualize the translations over the latent space 
