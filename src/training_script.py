@@ -98,7 +98,7 @@ def main(args):
     model.fit_generator(training_generator, steps_per_epoch=training_steps, epochs=args.num_epochs,
                         validation_data=next(validation_generator), validation_steps=validation_steps,
                         callbacks=[tb, checkpoint, generator_cb, capacity_cb, lr_schedule],
-                        workers=args.num_workers, use_multiprocessing=True)
+                        workers=args.num_workers, use_multiprocessing=args.multi_process)
 
 
 def parse_arguments(argv):
@@ -113,7 +113,7 @@ def parse_arguments(argv):
     
     parser.add_argument('--graph_dir', type=str,
                         help='The directory to write the training graphs.',
-                        default='../graphs/')
+                        default='../graphs/Celeb_A/')
 
     parser.add_argument('--arch_dir', type=str,
                         help='The directory to write the model architectures in pdf format.',
@@ -129,7 +129,7 @@ def parse_arguments(argv):
 
     parser.add_argument('--test_image_folder', type=str,
                         help='The directory of the test images.',
-                        default='../test_images/Celeb_A/')
+                        default='../test_images/')
 
     parser.add_argument('--gen_image_dir', type=str,
                         help='The directory to save the generated images at the end of each epoch.',
@@ -164,11 +164,11 @@ def parse_arguments(argv):
 
     parser.add_argument('--num_epochs', type=int,
                         help='The total number of epochs for training.',
-                        default=50)
+                        default=200)
 
     parser.add_argument('--scheduler_epoch', type=int,
                         help='The number of epochs to wait for the val loss to improve.',
-                        default=5)
+                        default=10)
 
     parser.add_argument('--decay_factor', type=float,
                         help='The learning rate decay factor.',
@@ -184,11 +184,15 @@ def parse_arguments(argv):
 
     parser.add_argument('--max_epochs', type=float,
                         help='The maximum epoch to linearly increase the vae capacity.',
-                        default=40)
+                        default=100)
 
     parser.add_argument('--num_workers', type=float,
                         help='The number of workers to use during training.',
                         default=8)
+
+    parser.add_argument('--multi_process', type=bool,
+                        help='Use multi-processing for dit generator during training.',
+                        default=True)
 
     return parser.parse_args(argv)
 

@@ -23,9 +23,9 @@ near-Gaussian distribution with a central mode.
 
 ## Training:
 As implemented in the paper, the gamma was chosen as 1000. The capacity parameter, C, was linearly increased from 0 to
-50 over a course of 40 epochs and then kept constant till the end of training (40 epochs). The bottlenecks for Celeb-A and 
+50 over a course of 150 epochs and then kept constant till the end of training (200 epochs). The bottlenecks for Celeb-A and 
 the 3D-Chairs experiment were taken as 32 and 16 respectively. As in the paper, the optimizer and the base learning rate 
-were selected to be ADAM and 5e-4 respectively.
+were selected to be ADAM and 5e-4 respectively. The [VAE model](src/architectures/deepmind_enc_model.pdf) was implemented as in the paper. 
  
 ## To Use:
 ### For training
@@ -39,15 +39,15 @@ The training_script.py can directly run from the src directory as:
 1) For the Celeb-A data set:
 ```
 python training_script.py --data_dir path/to/Celeb_A_data_dir --bottleneck 32 --val_split 0.2 \
---train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 50 \
---scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 40 --num_workers 8 
+--train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 200 \
+--scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 150 --multi_process True
 ```
 2) For 3D-chairs data set:
 
 ```
 python training_script.py --data_dir path/to/3D_Chairs_data_dir --bottleneck 16 --val_split 0.2 \
---train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 50 \
---scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 40 --num_workers 8
+--train_batch_size 64 --val_batch_size 64 --optimizer ADAM --base_learning_rate 5e-4 --num_epochs 200 \
+--scheduler_epoch 5 --decay_factor 0.1 --vae_gamma 1000 --capacity 50 --max_epochs 150 --multi_process True
 ```
 ### For visualizing 
 Firstly mention the path to the saved model in config.py. To visualize the translations over the latent space 
