@@ -1,3 +1,4 @@
+from math import log2
 from keras.layers import Convolution2D, UpSampling2D, Deconvolution2D, Reshape, Lambda, BatchNormalization, \
     Dense, Activation
 
@@ -6,7 +7,7 @@ class DeepMindDecoder:
     def __init__(self, decoder_input, latent_dim, output_shape):
         self._dec_input = decoder_input
         self._latent_dim = latent_dim
-        self.__deconv_func_reps = int(output_shape / 16)
+        self.__deconv_func_reps = int(log2(output_shape/4))
 
     @staticmethod
     def deconv_func(input_layer, pad_mode='same'):
