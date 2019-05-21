@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import warnings
+from math import log2
 
 from keras.layers import Input, BatchNormalization, Dense, Flatten, Activation
 from keras.layers.convolutional import Convolution2D
@@ -15,7 +16,7 @@ class DeepMindEncoder:
     def __init__(self, input_shape=64, latent_dim=10):
         self._input_shape = input_shape
         self._z_dim = latent_dim
-        self.__conv_func_reps = int(input_shape / 16)
+        self.__conv_func_reps = int(log2(input_shape/4))
 
     @staticmethod
     def conv_func(input_layer):
